@@ -2,7 +2,7 @@ from typing import List
 
 
 class Animal:
-    alive: List["Animal"] = []
+    alive = []
 
     def __init__(
             self, name: str, health: int = 100, hidden: bool = False,
@@ -24,9 +24,10 @@ class Herbivore(Animal):
 
 
 class Carnivore(Animal):
+    bite_damage = 50
 
     def bite(self, prey: Herbivore) -> None:
         if isinstance(prey, Herbivore) and not prey.hidden:
-            prey.health = prey.health - 50
+            prey.health = prey.health - Carnivore.bite_damage
         if prey.health <= 0 and prey in Animal.alive:
             Animal.alive.remove(prey)
